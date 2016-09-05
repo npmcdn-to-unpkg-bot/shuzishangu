@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <title>Stock Chart over WebSocket</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap.css">
+    <script src="../jquery-3.1.0.js"></script>
+    <script language="text/javascript">
+        // code from chapter goes here
+    </script>
+</head>
+<body lang="en">
+<div class="vertical-center">
+    <div class="container">
+        <h1>Stock Chart over WebSocket</h1>
+        <table class="table" id="stockTable">
+            <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody id="stockRows">
+            <tr>
+                <td><h3>AAPL</h3></td>
+                <td id="AAPL">
+                    <h3><span class="label label-default">95.00</span></h3>
+                </td>
+            </tr>
+            <tr>
+                <td><h3>MSFT</h3></td>
+                <td id="MSFT">
+                    <h3><span class="label label-default">50.00</span></h3>
+            </tr>
+            <tr>
+                <td><h3>AMZN</h3></td>
+                <td id="AMZN">
+                    <h3><span class="label label-default">300.00</span></h3>
+                </td>
+            </tr>
+            <tr>
+                <td><h3>GOOG</h3></td>
+                <td id="GOOG">
+                    <h3><span class="label label-default">550.00</span></h3>
+                </td>
+            </tr>
+            <tr>
+                <td><h3>YHOO</h3></td>
+                <td id="YHOO">
+                    <h3><span class="label label-default">35.00</span></h3>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body></html>

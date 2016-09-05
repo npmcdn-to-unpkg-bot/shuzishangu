@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap.js">
+</head>
+<body >
+<div >
+    <input type="text" ng-model="color" placeholder="enter a color~">
+    <hello-world></hello-world>
+    <p hello-world ></p>
+    <p>&times;</p>
+</div>
+<script src="../angular.js"></script>
+<script>
+    /*
+    * 自定义指令的4种方式
+    * <data-picker></data-picker>    <input type='text' data-picker/>
+    * css class <input type="text" class = 'data-picker'>
+    * 注释   <!-directive:data-picker ->     '
+    *The link function is mainly used for attaching event listeners to DOM elements,
+    * watching model properties for changes, and updating the DOM.
+    *
+    * 要注意的是 compile 函数不能访问 scope，并且必须返回一个 link 函数。但是如果没有
+    * 设置 compile 函数，你可以正常地配置 link 函数，（有了compile，就不能用link，
+    * link函数由compile返回）。compile函数可以写成如下的形式：
+     app.directive('test', function() {
+     return {
+     compile: function(tElem,attrs) {
+     //do optional DOM transformation here
+     return function(scope,elem,attrs) {
+     //linking function here
+     };
+     }
+     };
+     });
+    * */
+    var myApp = angular.module('myapp',[]);
+        myApp.directive('helloWorld',function(){
+            return {
+//                scope:true,
+                restrict:'AE',
+                template:'<h2 style="background-color: {{color}}">hello world</h2>',
+                replace:'true',
+                link: function (scope,elem,attrs) {
+                    elem.bind('click', function () {
+                        elem.css('background-color','white');
+                        scope.$apply(function(){
+                            scope.color='white';
+                        });
+                    });
+                    elem.bind('mouseover', function () {
+                        elem.css('cursor','pointer');
+                    })
+                }
+            }
+        });
+
+
+
+</script>
+</body>
+</html>

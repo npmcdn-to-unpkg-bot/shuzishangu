@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<section ng-controller="SomeController">
+    <ul ng-repeat="data in MyData.collection track by $index" >
+        <li> {{ data }} </li>
+    </ul>
+</section>
+
+<script src="./angular.js"></script>
+<script src="./angular-websocket.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

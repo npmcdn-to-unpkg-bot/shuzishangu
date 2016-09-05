@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+
+    <title>test</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap.js">
+</head>
+<body >
+<div ng-controller="myController">
+    <p>config1:{{fooConfig.config1}}</p>
+    <p>config2:{{fooConfig.config2}}</p>
+</div>
+<script src="../angular.js"></script>
+<script>
+    var myApp = angular.module('myapp',[])
+            .constant('fooConfig',{
+                config1:true,
+                config2:'default'
+            })
+            .controller('myController',function($scope,fooConfig){
+                $scope.fooConfig = fooConfig;
+            })
+</script>
+</body>
+</html>

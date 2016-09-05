@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap.js">
+</head>
+<body ng-app="intervalExample">
+<div ng-controller="myController">
+    <label for="">Date format: <input type="text" ng-model="format"></label><hr/>
+    Current time is : <span my-current-time="format"></span>
+    <hr>
+    Blood1 : {{blood_1}}
+    Blood2 : {{blood_2}}
+    <button type="button" data-ng-click="fight()">Fight</button>
+    <button type="button" data-ng-click="stopFight()">stopFight</button>
+    <button type="button" data-ng-click="resetFight()">resetFight</button>
+</div>
+<script src="../angular.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>-->
+<script>
+
+    angular.module('intervalExample',[])
+            .controller('myController',['$scope','$interval',function($scope,$interval){
+                $scope.format = 'M/d/yy h:mm:ss a';
+                $scope.blood_1 = 120;
+                $scope.blood_2 = 140;
+                
+                var stop ;
+                $scope.fight = function () {
+                    if(angular.isDefined(stop)) return;
+
+                    stop = $interval(function(){
+                        if($scope.blood_1>0&&$scope.blood_2>0){
+                            $scope.blood_1 -= 3;
+                            $scope.blood_2 -= 4;
+
+                        }else{
+                            $scope.stopFight();
+                        }
+                    },100)
+                };
+                $scope.stopFight = function () {
+                    if(angular.isDefined(stop)){
+                        $interval.cancel(stop);
+                        stop = undefined;
+                    }
+                };
+
+                $scope.resetFight = function () {
+                    $scope.blood_1 = 120;
+                    $scope.blood_2 = 140;
+                };
+
+                $scope.$on('$destroy', function() {
+                    // Make sure that the interval is destroyed too
+                    $scope.stopFight();
+                });
+
+            }])
+            .directive('myCurrentTime',['$interval','dateFilter',function($interval,dateFilter){
+                return function(scope,element,attrs){
+                    var format, stopTime;
+
+                    function updateTime(){
+                        element.text(dateFilter(new Date(),format));
+                    }
+
+                    scope.$watch(attrs.myCurrentTime,function(value){
+                        format = value;
+                        updateTime();
+                    });
+
+                    stopTime = $interval(updateTime,1000);
+
+                    element.on('$destroy',function(){
+                        $interval.cancel(stopTime);
+                    })
+                }
+            }])
+</script>
+</body>
+</html>

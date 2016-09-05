@@ -1,0 +1,12 @@
+Services :
+
+    mainjs {
+            authentifiedRequest  对$http简单包裹 $http
+            InterService          初始化和常量信息     authentifiedRequest, $cookieStore, clientService
+            clientService         没有依赖
+            batchSyncConfig       $translate, $q, lockScreen, task, toastr, InterService, operationLog
+            task                   $http, $q, authentifiedRequest
+            }
+    apjs   {
+                apService
+            }

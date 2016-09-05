@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap.js">
+</head>
+<body >
+<div ng-controller="myController">
+</div>
+<script src="../angular.js"></script>
+<script>
+    var makePromiseWithSon = function () {
+        SonService.getWeather()
+                //then called when son gets back
+                .then(function(data){
+                    //promise resolved
+                    if(data.forecast=='good'){
+                        prepareFishing();
+                    }else{
+                        prepareSundayRoastDinner();
+                    }
+                },function(error){
+                    //promise rejected
+                        prepareSundayRoastDinner();
+                })
+    }
+</script>
+</body>
+</html>

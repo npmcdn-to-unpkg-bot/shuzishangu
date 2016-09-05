@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap.js">
+</head>
+<body >
+<div ng-controller="myController">
+<button ng-click="sayHello()">hello</button>
+</div>
+
+<button type="button" class="btn btn-default" aria-label="Left Align">
+    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+</button>
+
+<button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+</button>
+
+<script src="../angular.js"></script>
+<script>
+    var myApp = angular.module('myapp',[])
+            .factory('myService', function () {
+                return {
+                    greet:function(msg){console.log(msg)}
+                }
+            })
+            .controller('myController',function($scope,myService){
+                $scope.sayHello=function(){
+                    myService.greet('hello');
+                }
+            });
+
+    var injector = angular.injector(['ng','myapp']);
+    injector.annotate(function($q,fox){});
+</script>
+</body>
+</html>
