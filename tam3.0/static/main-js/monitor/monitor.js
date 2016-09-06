@@ -156,7 +156,7 @@ angular.module("monitor", [])
 
     }])
     .service('monitorService', ['$filter', 'batchSyncConfig', 'authentifiedRequest', 'monitorfactory', 'clientService', function($filter, batchSyncConfig, authentifiedRequest, monitorfactory, clientService) {
-        vm = this;
+        var vm = this;
         //obser and params
         vm.obser = '';
         vm.ap_ip = '';

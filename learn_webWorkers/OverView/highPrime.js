@@ -12,3 +12,8 @@ search: while (true) {
  // found a prime!
  postMessage(n);
 }
+
+
+
+
+
