@@ -209,7 +209,7 @@ angular.module('main', ["ui.bootstrap",
 		//judge sth is array
 		var isArray = function(o) {
 			return Object.prototype.toString.call(o) === '[object Array]';
-		}
+		};
 
 		/**
 		 * [tips for user]

@@ -1,13 +1,37 @@
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-
-
-
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Web Worker: Inline Worker example</title>
+    <meta name="author" content="Ido Green">
+    <script src="../jquery-3.1.0.js"></script>
+  </head>
+  <style>
+    #status {
+      background: lightGreen;
+      border-radius: 15px;
+      padding: 15px;
+      overflow: auto;
+      height:450px;
+    }
+    article {
+      background: lightsalmon;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+  </style>
+  <body>
+    <h1>Web Worker: Inline Worker example</h1>
+    <article>
+      This is an example for inline Worker that we created "on the fly" without the need 
+to fetch our JavaScript code of the Worker from another file.<br/>
+      It is a useful method to create a self-contained page without having to create a 
+separate Worker file.<br/>
+      With the new BlobBuilder interface, you can "inline" your Worker in the same HTML 
+file as your main logic by creating a BlobBuilder and appending the Worker code as a string.
+    </article>
+    <div id="status"></div>
 
 
 
@@ -30,5 +54,31 @@
         postMessage("</ul><h3>Worker: Done</h3>");
       }
 </script>
+
+    <script>
+      function status(msg) {
+        $("#status").append(msg);
+      }
+      // Creating the BlobBuilder and adding our Web Worker code to it.
+      //new BlobBuilder();
+      var bb = new Blob([document.querySelector('#worker1').textContent]);
+
+
+
+//window.URL 不懂
+
+      // bb.append(document.querySelector('#worker1').textContent);
+      // creates a simple URL string that can be used to reference
+      // data stored in a DOM File / Blob object.
+      // In Chrome, there's a nice page to view all of the
+      // created blob URLs: chrome://blob-internals/
+      var worker = new Worker(window.webkitURL.createObjectURL(bb));
+      worker.onmessage = function(e) {
+        // pass the information we received from the worker and print it
+        status(e.data);
+      }
+      worker.postMessage(''); // Start the worker.
+    </script>
+
 </body>
 </html>
